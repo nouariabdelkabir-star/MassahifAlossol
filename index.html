@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title> مصاحف الأصول الملونة</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.16.105/build/pdf.min.js"></script>
+</head>
+<body>
+<button class="menu-toggle" id="menuToggle">☰</button>
+
+<div class="app-wrapper">
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>📚 مصاحف الأصول الملونة</h2>
+            <p>  للقراءات العشر من طريقي الشاطبية والدرة  </p>
+        </div>
+        <div class="mushaf-list" id="mushaf-list"></div>
+    </aside>
+
+    <div class="viewer-section">
+        <main class="viewer-area">
+            <div class="viewer-container" id="viewer-container">
+                <div class="placeholder">📖 اختر مصحفاً من القائمة</div>
+            </div>
+        </main>
+
+        <div class="bottom-bar">
+            <button class="ctrl-btn" id="prevBtn">▶▶</button>            
+            <div class="page-box">
+                <span class="page-label">-</span>
+                <input type="number" id="pageInput" class="page-input" value="1" min="1" max="604">
+                <span class="page-label" id="totalPagesLabel">-</span>
+            </div>
+            
+            <button class="ctrl-btn" id="nextBtn">◀◀</button>
+            <button class="ctrl-btn zoom-btn" id="zoomOutBtn">A-</button>
+            <button class="ctrl-btn zoom-btn" id="zoomInBtn">A+</button>
+            <button class="ctrl-btn surah-btn" id="openSurahBtn">📖فهرس</button>
+            <button class="ctrl-btn compare-btn" id="compareBtn">📊مقارنة</button>
+            
+
+            <button class="ctrl-btn" id="audioBtn">🔊استماع</button>
+            
+            <div id="miniPlayer" class="mini-player hidden">
+                <button id="miniPlayPause" class="mini-btn">⏸</button>
+                <button id="miniStop" class="mini-btn">⏹</button>
+                <div class="mini-progress" id="miniProgressContainer">
+                    <div class="mini-progress-bar" id="miniProgressBar"></div>
+                </div>
+                <span id="miniTime" class="mini-time">0:00</span>
+                <button id="miniVolumeBtn" class="mini-icon-btn">🔊</button>
+                <button id="miniClose" class="mini-icon-btn">✕</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="float-panel" id="surahPanel">
+    <div class="panel-header">
+        <h3>📖 فهرس السور القرآنية</h3>
+        <button class="close-panel" id="closeSurahPanel">✕</button>
+    </div>
+    <div class="panel-list" id="surahList"></div>
+</div>
+
+<div class="float-panel" id="compareSelectPanel">
+    <div class="panel-header" style="border-bottom-color: #9b59b6;">
+        <h3>📚 اختر مصحفاً للمقارنة</h3>
+        <button class="close-panel" id="closeComparePanel">✕</button>
+    </div>
+    <div class="panel-list" id="compareMushafList"></div>
+</div>
+
+<script src="js/script.js"></script>
+
+<script>
+    // إضافة زر نافع (قالون q4 + ورش q6)
+    setTimeout(function() {
+        var container = document.getElementById('mushaf-list');
+        if (container) {
+            if (document.getElementById('nafiBtn')) return;
+            
+            // البحث عن زر الأصبهاني
+            var asbahaniBtn = null;
+            var buttons = container.querySelectorAll('.mushaf-btn');
+            for (var i = 0; i < buttons.length; i++) {
+                if (buttons[i].textContent.includes('الأصبهاني') || buttons[i].textContent.includes('asbahani')) {
+                    asbahaniBtn = buttons[i];
+                    break;
+                }
+            }
+            
+            var nafiButton = document.createElement('button');
+            nafiButton.id = 'nafiBtn';
+            nafiButton.className = 'mushaf-btn';
+            nafiButton.innerHTML = '🕌 قراءة نافع (قالون + ورش)';
+            nafiButton.style.borderRightColor = '#8e44ad';
+            nafiButton.style.marginTop = '15px';
+            nafiButton.style.borderTop = '1px solid #8e44ad';
+            nafiButton.style.paddingTop = '12px';
+            
+            nafiButton.onclick = function() {
+                // تفعيل المقارنة
+                var compareBtn = document.getElementById('compareBtn');
+                if (compareBtn) compareBtn.click();
+                
+                setTimeout(function() {
+                    // قالون q4
+                    var qalunBtn = document.querySelector('.mushaf-btn[data-id="q4"]');
+                    if (qalunBtn) qalunBtn.click();
+                    
+                    setTimeout(function() {
+                        // ورش q6 (بتوسط البدل مع التقليل)
+                        var comparePanel = document.getElementById('compareSelectPanel');
+                        if (comparePanel) comparePanel.classList.add('open');
+                        
+                        setTimeout(function() {
+                            var warshItems = document.querySelectorAll('#compareMushafList div');
+                            // البحث عن ورش q6
+                            for (var j = 0; j < warshItems.length; j++) {
+                                if (warshItems[j].textContent.includes('بتوسط البدل مع التقليل')) {
+                                    warshItems[j].click();
+                                    break;
+                                }
+                            }
+                        }, 500);
+                    }, 500);
+                }, 500);
+            };
+            
+            // إدراج الزر بعد الأصبهاني
+            if (asbahaniBtn && asbahaniBtn.parentNode) {
+                asbahaniBtn.parentNode.insertBefore(nafiButton, asbahaniBtn.nextSibling);
+            } else {
+                container.appendChild(nafiButton);
+            }
+            
+            console.log("✅ تم إضافة زر نافع (قالون q4 + ورش q6)");
+        }
+    }, 2000);
+</script>
+
+</body>
+</html>
