@@ -308,6 +308,24 @@ iframe {
     background-color: #1abc9c;
 }
 
+/* أزرار التكبير والتصغير */
+.zoom-btn {
+    background-color: #3498db;
+}
+
+.zoom-btn:hover {
+    background-color: #2980b9;
+}
+
+.zoom-level {
+    background-color: #0f3460;
+    padding: 4px 10px;
+    border-radius: 20px;
+    color: #a0c4e2;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
 /* ========== اللوحات المنبثقة ========== */
 .float-panel {
     position: fixed;
@@ -436,175 +454,8 @@ iframe {
     border-radius: 5px;
 }
 
-/* ========== تحسينات للهواتف ========== */
-@media (max-width: 900px) {
-    .bottom-bar {
-        gap: 8px;
-        padding: 8px 12px;
-        margin: 0 8px 8px 8px;
-    }
-    
-    .ctrl-btn {
-        padding: 5px 12px;
-        font-size: 0.75rem;
-    }
-    
-    .page-box {
-        padding: 3px 8px;
-    }
-    
-    .page-input {
-        width: 50px;
-    }
-    
-    .mini-progress {
-        width: 60px;
-    }
-}
-
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .bottom-bar {
-    overflow-x: auto;
-    white-space: nowrap;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-}
-    .sidebar {
-        position: fixed;
-        top: 0;
-        right: -280px;
-        width: 260px;
-        height: 100%;
-        z-index: 1001;
-        transition: right 0.3s ease;
-        box-shadow: 2px 0 15px rgba(0,0,0,0.3);
-    }
-    
-    .sidebar.open {
-        right: 0;
-    }
-    
-    .sidebar-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0,0,0,0.5);
-        z-index: 1000;
-        display: none;
-    }
-    
-    .sidebar-overlay.active {
-        display: block;
-    }
-    
-    .float-panel {
-        width: 85%;
-        right: -85%;
-    }
-    
-    .compare-split {
-        flex-direction: row;
-        gap: 5px;
-    }
-    
-    .compare-label {
-        font-size: 0.6rem;
-        padding: 4px;
-    }
-}
-
-@media (max-width: 700px) {
-    .bottom-bar {
-        flex-wrap: wrap;
-    }
-    
-    .mini-player {
-        padding: 2px 8px;
-        gap: 4px;
-    }
-    
-    .mini-btn {
-        padding: 3px 5px;
-        font-size: 0.7rem;
-    }
-    
-    .mini-icon-btn {
-        padding: 3px 4px;
-        font-size: 0.65rem;
-    }
-    
-    .mini-progress {
-        width: 50px;
-    }
-    
-    .mini-time {
-        font-size: 0.55rem;
-        min-width: 30px;
-    }
-}
-
-@media (max-width: 480px) {
-    .ctrl-btn {
-        padding: 5px 10px;
-        font-size: 0.7rem;
-    }
-    
-    .page-label {
-        font-size: 0.65rem;
-    }
-    
-    .float-panel {
-        width: 92%;
-        right: -92%;
-    }
-}
-
 /* ========================================
-   أزرار التكبير والتصغير
-   ======================================== */
-.zoom-btn {
-    background-color: #3498db;
-}
-
-.zoom-btn:hover {
-    background-color: #2980b9;
-}
-
-/* عرض مستوى التكبير الحالي (اختياري) */
-.zoom-level {
-    background-color: #0f3460;
-    padding: 4px 10px;
-    border-radius: 20px;
-    color: #a0c4e2;
-    font-size: 0.7rem;
-    font-weight: bold;
-}
-/* ========================================
-   أزرار وضع العرض (صفحة واحدة / صفحتين)
-   ======================================== */
-/* أزرار وضع العرض */
-.view-mode-btn {
-    background-color: #3498db;
-}
-
-.view-mode-btn:hover {
-    background-color: #2980b9;
-}
-
-.view-mode-btn.active {
-    background-color: #2c3e50;
-    border: 1px solid #3498db;
-}
-
-/* ========================================
-   تحسينات للهواتف (شريط سفلي مضغوط)
+   تحسينات الهواتف (شاملة ومتكاملة)
    ======================================== */
 
 @media (max-width: 768px) {
@@ -670,7 +521,7 @@ iframe {
         padding: 4px;
     }
     
-    /* ===== الشريط السفلي - تصميم مضغوط ===== */
+    /* ===== الشريط السفلي ===== */
     .bottom-bar {
         overflow-x: auto;
         overflow-y: hidden;
@@ -678,30 +529,33 @@ iframe {
         justify-content: flex-start;
         gap: 6px;
         padding: 8px 12px;
-        border-radius: 0 0 12px 12px;
         margin: 0 8px 8px 8px;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: thin;
     }
     
-    /* الأزرار - مربعة وصغيرة */
+    /* الأزرار */
     .ctrl-btn {
         padding: 6px 10px;
         border-radius: 8px;
-        font-size: 0.75rem;
+        font-size: 0;
         flex-shrink: 0;
         min-width: 40px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 4px;
     }
     
-    /* أزرار الرموز فقط (بدون نص) */
-    #prevBtn, #nextBtn, #openSurahBtn, #compareBtn, #audioBtn,
-    #zoomOutBtn, #zoomInBtn {
-        padding: 6px 8px;
-    }
+    /* إضافة الرموز للأزرار */
+    #prevBtn::before { content: "◀"; font-size: 1rem; }
+    #nextBtn::before { content: "▶"; font-size: 1rem; }
+    #openSurahBtn::before { content: "📖"; font-size: 1rem; }
+    #compareBtn::before { content: "📊"; font-size: 1rem; }
+    #audioBtn::before { content: "🔊"; font-size: 1rem; }
+    #zoomOutBtn::before { content: "🔍-"; font-size: 0.9rem; }
+    #zoomInBtn::before { content: "🔍+"; font-size: 0.9rem; }
+    #toggleSourceBtn::before { content: "🌐"; font-size: 0.9rem; margin-right: 3px; }
+    #toggleSourceBtn { font-size: 0; padding: 6px 8px; }
     
     /* صفحة التحكم */
     .page-box {
@@ -720,7 +574,7 @@ iframe {
         font-size: 0.65rem;
     }
     
-    /* مشغل الصوت المصغر */
+    /* مشغل الصوت */
     .mini-player {
         padding: 3px 8px;
         border-radius: 8px;
@@ -767,117 +621,30 @@ iframe {
 }
 
 /* ========================================
-   شاشات صغيرة جداً
+   شاشات صغيرة جداً (أقل من 480px)
    ======================================== */
 
 @media (max-width: 480px) {
     .ctrl-btn {
         padding: 5px 8px;
-        font-size: 0.7rem;
+        min-width: 36px;
     }
     
-    #prevBtn, #nextBtn, #openSurahBtn, #compareBtn, #audioBtn,
-    #zoomOutBtn, #zoomInBtn {
-        padding: 5px 6px;
+    .page-input {
+        width: 38px;
+        font-size: 0.7rem;
     }
     
     .page-label {
         font-size: 0.6rem;
     }
     
-    .page-input {
-        width: 40px;
-        font-size: 0.7rem;
-    }
-    
     .float-panel {
         width: 92%;
         right: -92%;
     }
-}
-/* ========================================
-   للهواتف: تحويل النصوص إلى رموز (أيقونات)
-   ======================================== */
-
-@media (max-width: 768px) {
-    /* إخفاء النص الأصلي للأزرار المحددة */
-    .ctrl-btn span.text,
-    .ctrl-btn .btn-text {
-        display: none;
-    }
     
-    /* جعل الأزرار تحتوي على رموز فقط */
-    #prevBtn::before {
-        content: "◀";
-        font-size: 1rem;
-    }
-    #prevBtn {
-        font-size: 0;
-        padding: 8px 12px;
-    }
-    
-    #nextBtn::before {
-        content: "▶";
-        font-size: 1rem;
-    }
-    #nextBtn {
-        font-size: 0;
-        padding: 8px 12px;
-    }
-    
-    #openSurahBtn::before {
-        content: "📖";
-        font-size: 1rem;
-    }
-    #openSurahBtn {
-        font-size: 0;
-        padding: 8px 10px;
-    }
-    
-    #compareBtn::before {
-        content: "📊";
-        font-size: 1rem;
-    }
-    #compareBtn {
-        font-size: 0;
-        padding: 8px 10px;
-    }
-    
-    #audioBtn::before {
-        content: "🔊";
-        font-size: 1rem;
-    }
-    #audioBtn {
-        font-size: 0;
-        padding: 8px 10px;
-    }
-    
-    #zoomOutBtn::before {
-        content: "🔍-";
-        font-size: 0.9rem;
-    }
-    #zoomOutBtn {
-        font-size: 0;
-        padding: 8px 8px;
-    }
-    
-    #zoomInBtn::before {
-        content: "🔍+";
-        font-size: 0.9rem;
-    }
-    #zoomInBtn {
-        font-size: 0;
-        padding: 8px 8px;
-    }
-    
-    /* زر التبديل بين المصادر */
-    #toggleSourceBtn {
-        font-size: 0.7rem;
-        padding: 6px 8px;
-    }
-    #toggleSourceBtn::before {
-        content: "🌐";
-        font-size: 0.9rem;
-        margin-left: 3px;
+    .mini-progress {
+        width: 40px;
     }
 }
