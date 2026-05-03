@@ -198,18 +198,14 @@ let compareIframe = null;
 function getRealPage(displayPage, startPage) {
     return displayPage + (startPage || 3) - 1;
 }
+
 function buildViewerUrl(pdfPath, realPage) {
-    // 1. قم ببناء الرابط الكامل للملف (Base URL + مسار الملف النسبي)
-    // تأكد من أن baseUrl هو الرابط الصحيح لموقعك
-    const baseUrl = "https://massahifalossol-nouari.github.io/MassahifAlossol/";
-    const fullPdfUrl = baseUrl + pdfPath;
-    
-    // 2. قم بترميز الرابط ليكون صالحًا للاستخدام في query parameter
-    const encodedPath = encodeURIComponent(fullPdfUrl);
-    
-    // 3. قم ببناء رابط العارض النهائي
+    // تجاهل المسار النسبي تماماً واستخدم الرابط المباشر
+    const fileName = pdfPath.split('/').pop(); // qalun1.pdf
+    const directUrl = `https://massahifalossol-nouari.github.io/MassahifAlossol/pdfs/${fileName}`;
+    const encodedPath = encodeURIComponent(directUrl);
     return `pdfjs/web/viewer.html?file=${encodedPath}#page=${realPage}`;
-}
+
 
 
 //function buildViewerUrl(pdfPath, realPage) {
