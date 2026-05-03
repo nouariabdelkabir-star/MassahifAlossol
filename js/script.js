@@ -200,11 +200,10 @@ function getRealPage(displayPage, startPage) {
 }
 
 function buildViewerUrl(pdfPath, realPage) {
-    const baseUrl = "https://massahifalossol-nouari.github.io/MassahifAlossol/";
-    const fullPath = window.location.origin + '/' + pdfPath;
+    // تجاهل المسار النسبي تماماً واستخدم الرابط المباشر
     const fileName = pdfPath.split('/').pop(); // qalun1.pdf
     const directUrl = `https://massahifalossol-nouari.github.io/MassahifAlossol/pdfs/${fileName}`;
-    const encodedPath = encodeURIComponent(fullPath);
+    const encodedPath = encodeURIComponent(directUrl);
     return `pdfjs/web/viewer.html?file=${encodedPath}#page=${realPage}`;
 }
 
