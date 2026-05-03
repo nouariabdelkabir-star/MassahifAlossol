@@ -602,4 +602,57 @@ iframe {
     background-color: #2c3e50;
     border: 1px solid #3498db;
 }
+/* ========================================
+   تحسين خاص لهواتف ريالمي والأندرويد
+   ======================================== */
 
+/* للهواتف بشكل عام */
+@media (max-width: 768px) {
+    .bottom-bar {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px;
+        padding: 8px;
+        background-color: #16213e;
+        border-radius: 0 0 12px 12px;
+        margin: 0 8px 8px 8px;
+    }
+    
+    /* جعل الأزرار تظهر في صفوف متعددة */
+    .ctrl-btn {
+        padding: 6px 10px;
+        font-size: 0.7rem;
+        min-width: 60px;
+    }
+    
+    /* تحسين صفحة التحكم */
+    .page-box {
+        padding: 3px 8px;
+        order: 1;
+    }
+    
+    /* زر الاستماع */
+    #audioBtn {
+        order: 2;
+    }
+    
+    /* زر المقارنة */
+    #compareBtn {
+        order: 3;
+    }
+    
+    /* أزرار التكبير */
+    .zoom-btn {
+        order: 4;
+    }
+    
+    /* مشغل الصوت المصغر */
+    .mini-player {
+        order: 5;
+        width: 100%;
+        justify-content: center;
+        margin-top: 5px;
+        padding: 4px 10px;
+    }
+}
