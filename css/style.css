@@ -648,3 +648,30 @@ iframe {
         width: 40px;
     }
 }
+/* شريط سفلي ثابت لريالمي */
+@media (max-width: 768px) {
+    .bottom-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        border-radius: 12px 12px 0 0;
+        margin: 0;
+        z-index: 100;
+        background-color: #16213e;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+        padding: 8px;
+    }
+    
+    /* تعويض المسافة للشريط الثابت */
+    .viewer-section {
+        margin-bottom: 80px;
+    }
+    
+    .viewer-container iframe {
+        height: calc(100vh - 180px);
+    }
+}
