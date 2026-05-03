@@ -200,22 +200,11 @@ function getRealPage(displayPage, startPage) {
 }
 
 function buildViewerUrl(pdfPath, realPage) {
-    // المسار المطلق لموقعك
-    const siteUrl = "https://massahifalossol-nouari.github.io/MassahifAlossol/";
-    const fullPath = siteUrl + pdfPath;
+    const baseUrl = "https://massahifalossol-nouari.github.io/MassahifAlossol/";
+    const fullPath = window.location.origin + '/' + pdfPath;
     const encodedPath = encodeURIComponent(fullPath);
-    
-    console.log("📄 تحميل PDF من:", fullPath);
     return `pdfjs/web/viewer.html?file=${encodedPath}#page=${realPage}`;
 }
-
-
-//function buildViewerUrl(pdfPath, realPage) {
-  //  const baseUrl = "https://massahifalossol-nouari.github.io/MassahifAlossol/";
-  //  const fullPath = window.location.origin + '/' + pdfPath;
-  //  const encodedPath = encodeURIComponent(fullPath);
-  //  return `pdfjs/web/viewer.html?file=${encodedPath}#page=${realPage}`;
-//}
 
 function savePage(page) { localStorage.setItem(PAGE_STORAGE, page); }
 function getSavedPage() {
