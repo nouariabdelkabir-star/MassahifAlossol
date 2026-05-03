@@ -602,58 +602,197 @@ iframe {
     background-color: #2c3e50;
     border: 1px solid #3498db;
 }
+
 /* ========================================
-   تحسين خاص لهواتف ريالمي والأندرويد
+   تحسينات للهواتف (شريط سفلي مضغوط)
    ======================================== */
 
-/* للهواتف بشكل عام */
 @media (max-width: 768px) {
-    .bottom-bar {
+    /* زر القائمة */
+    .menu-toggle {
         display: flex;
-        flex-wrap: wrap;
+        align-items: center;
         justify-content: center;
+    }
+    
+    /* القائمة الجانبية */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        right: -280px;
+        width: 260px;
+        height: 100%;
+        z-index: 1001;
+        transition: right 0.3s ease;
+        box-shadow: 2px 0 15px rgba(0,0,0,0.3);
+    }
+    
+    .sidebar.open {
+        right: 0;
+    }
+    
+    /* خلفية داكنة */
+    .sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 1000;
+        display: none;
+    }
+    
+    .sidebar-overlay.active {
+        display: block;
+    }
+    
+    /* منطقة العرض */
+    .viewer-area {
+        margin-right: 0;
+        width: 100%;
+    }
+    
+    /* اللوحات المنبثقة */
+    .float-panel {
+        width: 85%;
+        right: -85%;
+    }
+    
+    /* وضع المقارنة */
+    .compare-split {
+        flex-direction: row;
+        gap: 5px;
+    }
+    
+    .compare-label {
+        font-size: 0.6rem;
+        padding: 4px;
+    }
+    
+    /* ===== الشريط السفلي - تصميم مضغوط ===== */
+    .bottom-bar {
+        overflow-x: auto;
+        overflow-y: hidden;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
         gap: 6px;
-        padding: 8px;
-        background-color: #16213e;
+        padding: 8px 12px;
         border-radius: 0 0 12px 12px;
         margin: 0 8px 8px 8px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
     }
     
-    /* جعل الأزرار تظهر في صفوف متعددة */
+    /* الأزرار - مربعة وصغيرة */
     .ctrl-btn {
         padding: 6px 10px;
-        font-size: 0.7rem;
-        min-width: 60px;
+        border-radius: 8px;
+        font-size: 0.75rem;
+        flex-shrink: 0;
+        min-width: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
     }
     
-    /* تحسين صفحة التحكم */
+    /* أزرار الرموز فقط (بدون نص) */
+    #prevBtn, #nextBtn, #openSurahBtn, #compareBtn, #audioBtn,
+    #zoomOutBtn, #zoomInBtn {
+        padding: 6px 8px;
+    }
+    
+    /* صفحة التحكم */
     .page-box {
         padding: 3px 8px;
-        order: 1;
+        border-radius: 8px;
+        flex-shrink: 0;
     }
     
-    /* زر الاستماع */
-    #audioBtn {
-        order: 2;
+    .page-input {
+        width: 45px;
+        padding: 3px;
+        font-size: 0.75rem;
     }
     
-    /* زر المقارنة */
-    #compareBtn {
-        order: 3;
-    }
-    
-    /* أزرار التكبير */
-    .zoom-btn {
-        order: 4;
+    .page-label {
+        font-size: 0.65rem;
     }
     
     /* مشغل الصوت المصغر */
     .mini-player {
-        order: 5;
-        width: 100%;
-        justify-content: center;
-        margin-top: 5px;
-        padding: 4px 10px;
+        padding: 3px 8px;
+        border-radius: 8px;
+        gap: 4px;
+        flex-shrink: 0;
+    }
+    
+    .mini-btn {
+        padding: 3px 5px;
+        font-size: 0.7rem;
+        border-radius: 6px;
+    }
+    
+    .mini-icon-btn {
+        padding: 3px 4px;
+        font-size: 0.65rem;
+        border-radius: 6px;
+    }
+    
+    .mini-progress {
+        width: 50px;
+        height: 3px;
+    }
+    
+    .mini-time {
+        font-size: 0.55rem;
+        min-width: 30px;
+    }
+    
+    /* شريط التمرير */
+    .bottom-bar::-webkit-scrollbar {
+        height: 3px;
+    }
+    
+    .bottom-bar::-webkit-scrollbar-track {
+        background: #1e2a3a;
+        border-radius: 3px;
+    }
+    
+    .bottom-bar::-webkit-scrollbar-thumb {
+        background: #e94560;
+        border-radius: 3px;
+    }
+}
+
+/* ========================================
+   شاشات صغيرة جداً
+   ======================================== */
+
+@media (max-width: 480px) {
+    .ctrl-btn {
+        padding: 5px 8px;
+        font-size: 0.7rem;
+    }
+    
+    #prevBtn, #nextBtn, #openSurahBtn, #compareBtn, #audioBtn,
+    #zoomOutBtn, #zoomInBtn {
+        padding: 5px 6px;
+    }
+    
+    .page-label {
+        font-size: 0.6rem;
+    }
+    
+    .page-input {
+        width: 40px;
+        font-size: 0.7rem;
+    }
+    
+    .float-panel {
+        width: 92%;
+        right: -92%;
     }
 }
 /* ========================================
