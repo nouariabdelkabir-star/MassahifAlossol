@@ -468,7 +468,12 @@ iframe {
         align-items: center;
         justify-content: center;
     }
-    
+    .bottom-bar {
+    overflow-x: auto;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+}
     .sidebar {
         position: fixed;
         top: 0;
