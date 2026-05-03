@@ -42,6 +42,7 @@
             
 
             <button class="ctrl-btn" id="audioBtn">🔊استماع</button>
+            <button class="ctrl-btn more-btn" id="moreBtn">☰ المزيد</button>
             
             <div id="miniPlayer" class="mini-player hidden">
                 <button id="miniPlayPause" class="mini-btn">⏸</button>
@@ -140,6 +141,77 @@
             console.log("✅ تم إضافة زر نافع (قالون q4 + ورش q6)");
         }
     }, 2000);
+</script>
+    <script>
+    // قائمة المزيد للهواتف
+    (function() {
+        var moreBtn = document.getElementById('moreBtn');
+        if (!moreBtn) return;
+        
+        var moreMenu = null;
+        
+        moreBtn.onclick = function(e) {
+            e.stopPropagation();
+            
+            if (moreMenu) {
+                moreMenu.remove();
+                moreMenu = null;
+                return;
+            }
+            
+            moreMenu = document.createElement('div');
+            moreMenu.className = 'more-menu';
+            moreMenu.innerHTML = `
+                <button id="menuZoomOutBtn">🔍- تصغير</button>
+                <button id="menuZoomInBtn">🔍+ تكبير</button>
+                <button id="menuSurahBtn">📖 فهرس السور</button>
+                <button id="menuCompareBtn">📊 مقارنة</button>
+                <button id="menuSourceBtn">🌐 تبديل المصدر</button>
+            `;
+            document.body.appendChild(moreMenu);
+            
+            document.getElementById('menuZoomOutBtn').onclick = function() {
+                var btn = document.getElementById('zoomOutBtn');
+                if (btn) btn.click();
+                if (moreMenu) moreMenu.remove();
+                moreMenu = null;
+            };
+            document.getElementById('menuZoomInBtn').onclick = function() {
+                var btn = document.getElementById('zoomInBtn');
+                if (btn) btn.click();
+                if (moreMenu) moreMenu.remove();
+                moreMenu = null;
+            };
+            document.getElementById('menuSurahBtn').onclick = function() {
+                var btn = document.getElementById('openSurahBtn');
+                if (btn) btn.click();
+                if (moreMenu) moreMenu.remove();
+                moreMenu = null;
+            };
+            document.getElementById('menuCompareBtn').onclick = function() {
+                var btn = document.getElementById('compareBtn');
+                if (btn) btn.click();
+                if (moreMenu) moreMenu.remove();
+                moreMenu = null;
+            };
+            document.getElementById('menuSourceBtn').onclick = function() {
+                var btn = document.getElementById('toggleSourceBtn');
+                if (btn) btn.click();
+                if (moreMenu) moreMenu.remove();
+                moreMenu = null;
+            };
+            
+            setTimeout(function() {
+                document.addEventListener('click', function closeMenu(e) {
+                    if (moreMenu && !moreMenu.contains(e.target) && e.target !== moreBtn) {
+                        moreMenu.remove();
+                        moreMenu = null;
+                        document.removeEventListener('click', closeMenu);
+                    }
+                });
+            }, 100);
+        };
+    })();
 </script>
 
 </body>
