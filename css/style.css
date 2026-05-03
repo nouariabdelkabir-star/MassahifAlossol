@@ -628,3 +628,65 @@ iframe {
         width: auto !important;
     }
 }
+/* ========================================
+   زر المزيد للهواتف (يظهر فقط على الشاشات الصغيرة)
+   ======================================== */
+
+/* إخفاء زر المزيد على الكمبيوتر */
+@media (min-width: 769px) {
+    .more-btn {
+        display: none !important;
+    }
+}
+
+/* على الهواتف: إظهار زر المزيد وإخفاء الأزرار الزائدة */
+@media (max-width: 768px) {
+    .more-btn {
+        display: inline-flex !important;
+        background-color: #555;
+    }
+    
+    .more-btn:hover {
+        background-color: #777;
+    }
+    
+    /* إخفاء الأزرار الزائدة على الهاتف */
+    #zoomOutBtn, #zoomInBtn, #openSurahBtn, #compareBtn, #toggleSourceBtn {
+        display: none !important;
+    }
+}
+
+/* القائمة المنبثقة */
+.more-menu {
+    position: fixed;
+    bottom: 70px;
+    right: 10px;
+    background-color: #16213e;
+    border-radius: 12px;
+    padding: 8px;
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 130px;
+}
+
+.more-menu button {
+    background-color: #0f3460;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: right;
+    font-size: 0.8rem;
+}
+
+.more-menu button:hover {
+    background-color: #e94560;
+}
+
+.more-menu.hidden {
+    display: none;
+}
