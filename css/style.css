@@ -455,7 +455,7 @@ iframe {
 }
 
 /* ========================================
-   تحسينات الهواتف (شاملة ومتكاملة)
+   تحسينات الهواتف (أزرار صغيرة + إخفاء مشغل الصوت)
    ======================================== */
 
 @media (max-width: 768px) {
@@ -482,7 +482,6 @@ iframe {
         right: 0;
     }
     
-    /* خلفية داكنة */
     .sidebar-overlay {
         position: fixed;
         top: 0;
@@ -498,19 +497,16 @@ iframe {
         display: block;
     }
     
-    /* منطقة العرض */
     .viewer-area {
         margin-right: 0;
         width: 100%;
     }
     
-    /* اللوحات المنبثقة */
     .float-panel {
         width: 85%;
         right: -85%;
     }
     
-    /* وضع المقارنة */
     .compare-split {
         flex-direction: row;
         gap: 5px;
@@ -521,122 +517,78 @@ iframe {
         padding: 4px;
     }
     
-    /* ===== الشريط السفلي ===== */
+    /* ===== الشريط السفلي - أزرار صغيرة جداً ===== */
     .bottom-bar {
-        overflow-x: auto;
-        overflow-y: hidden;
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-        gap: 6px;
-        padding: 8px 12px;
-        margin: 0 8px 8px 8px;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: thin;
-    }
-    
-    /* الأزرار */
-    .ctrl-btn {
-        padding: 6px 10px;
-        border-radius: 8px;
-        font-size: 0;
-        flex-shrink: 0;
-        min-width: 40px;
-        display: inline-flex;
-        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
         justify-content: center;
+        gap: 6px;
+        padding: 8px 10px;
+        margin: 0 8px 12px 8px;
     }
     
-    /* إضافة الرموز للأزرار */
-    #prevBtn::before { content: "◀"; font-size: 1rem; }
-    #nextBtn::before { content: "▶"; font-size: 1rem; }
-    #openSurahBtn::before { content: "📖"; font-size: 1rem; }
-    #compareBtn::before { content: "📊"; font-size: 1rem; }
-    #audioBtn::before { content: "🔊"; font-size: 1rem; }
-    #zoomOutBtn::before { content: "🔍-"; font-size: 0.9rem; }
-    #zoomInBtn::before { content: "🔍+"; font-size: 0.9rem; }
-    #toggleSourceBtn::before { content: "🌐"; font-size: 0.9rem; margin-right: 3px; }
-    #toggleSourceBtn { font-size: 0; padding: 6px 8px; }
+    /* تصغير الأزرار */
+    .ctrl-btn {
+        padding: 5px 10px;
+        border-radius: 8px;
+        font-size: 0.65rem;
+        min-width: 50px;
+    }
     
-    /* صفحة التحكم */
+    /* تصغير صفحة التحكم */
     .page-box {
         padding: 3px 8px;
         border-radius: 8px;
-        flex-shrink: 0;
     }
     
     .page-input {
         width: 45px;
         padding: 3px;
-        font-size: 0.75rem;
-    }
-    
-    .page-label {
-        font-size: 0.65rem;
-    }
-    
-    /* مشغل الصوت */
-    .mini-player {
-        padding: 3px 8px;
-        border-radius: 8px;
-        gap: 4px;
-        flex-shrink: 0;
-    }
-    
-    .mini-btn {
-        padding: 3px 5px;
-        font-size: 0.7rem;
-        border-radius: 6px;
-    }
-    
-    .mini-icon-btn {
-        padding: 3px 4px;
-        font-size: 0.65rem;
-        border-radius: 6px;
-    }
-    
-    .mini-progress {
-        width: 50px;
-        height: 3px;
-    }
-    
-    .mini-time {
-        font-size: 0.55rem;
-        min-width: 30px;
-    }
-    
-    /* شريط التمرير */
-    .bottom-bar::-webkit-scrollbar {
-        height: 3px;
-    }
-    
-    .bottom-bar::-webkit-scrollbar-track {
-        background: #1e2a3a;
-        border-radius: 3px;
-    }
-    
-    .bottom-bar::-webkit-scrollbar-thumb {
-        background: #e94560;
-        border-radius: 3px;
-    }
-}
-
-/* ========================================
-   شاشات صغيرة جداً (أقل من 480px)
-   ======================================== */
-
-@media (max-width: 480px) {
-    .ctrl-btn {
-        padding: 5px 8px;
-        min-width: 36px;
-    }
-    
-    .page-input {
-        width: 38px;
         font-size: 0.7rem;
     }
     
     .page-label {
         font-size: 0.6rem;
+    }
+    
+    /* ===== إخفاء مشغل الصوت على الهواتف إلا عند التشغيل ===== */
+    .mini-player {
+        display: none !important;
+    }
+    
+    /* إظهاره فقط عند التشغيل (عند إزالة كلاس hidden) */
+    .mini-player:not(.hidden) {
+        display: flex !important;
+        width: 100%;
+        justify-content: center;
+        margin-top: 6px;
+        order: 10;
+    }
+    
+    /* زر الصوت يبقى ظاهراً */
+    #audioBtn {
+        display: inline-flex !important;
+    }
+}
+
+/* ========================================
+   شاشات صغيرة جداً
+   ======================================== */
+
+@media (max-width: 480px) {
+    .ctrl-btn {
+        padding: 4px 7px;
+        font-size: 0.6rem;
+        min-width: 42px;
+    }
+    
+    .page-input {
+        width: 38px;
+        font-size: 0.65rem;
+    }
+    
+    .page-label {
+        font-size: 0.55rem;
     }
     
     .float-panel {
@@ -645,7 +597,34 @@ iframe {
     }
     
     .mini-progress {
-        width: 40px;
+        width: 50px;
     }
 }
 
+/* ========================================
+   حل خاص لهواتف ريالمي
+   ======================================== */
+
+@media (max-width: 768px) and (-webkit-min-device-pixel-ratio: 0) {
+    .bottom-bar {
+        display: block !important;
+        text-align: center !important;
+    }
+    
+    .bottom-bar .ctrl-btn,
+    .bottom-bar .page-box {
+        display: inline-block !important;
+        margin: 3px !important;
+        vertical-align: middle !important;
+    }
+    
+    .ctrl-btn {
+        display: inline-block !important;
+        width: auto !important;
+    }
+    
+    .mini-player:not(.hidden) {
+        display: inline-flex !important;
+        width: auto !important;
+    }
+}
