@@ -7,9 +7,9 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dis
 // 2. قائمة المصاحف
 // ============================================================
 const mushafs = [
-    { name: "1️⃣قالون بالقصر والإسكان",    id: "q1", path: "pdfs/qalun1.pdf", startPage: 2 },
-    { name: "1️⃣قالون بالقصر والصلة",      id: "q2", path: "pdfs/qalun2.pdf", startPage: 2 },
-    { name: "1️⃣قالون بالتوسط والإسكان",   id: "q3", path: "pdfs/qalun3.pdf", startPage: 2 },
+    { name: "1️⃣  قالون بالقصر والإسكان",    id: "q1", path: "pdfs/qalun1.pdf", startPage: 2 },
+    { name: "1️⃣ قالون بالقصر والصلة",      id: "q2", path: "pdfs/qalun2.pdf", startPage: 2 },
+    { name: "1️⃣ قالون بالتوسط والإسكان",   id: "q3", path: "pdfs/qalun3.pdf", startPage: 2 },
     { name: "1️⃣ قالون بالتوسط والصلة",     id: "q4", path: "pdfs/qalun4.pdf", startPage: 2 },
     { name: "1️⃣ ورش بقصر البدل مع الفتح",     id: "q5", path: "pdfs/warch1.pdf", startPage: 2 },
     { name: "1️⃣ ورش بتوسط البدل مع التقليل",     id: "q6", path: "pdfs/warch2.pdf", startPage: 2 },
@@ -200,21 +200,15 @@ function getRealPage(displayPage, startPage) {
 }
 
 function buildViewerUrl(pdfPath, realPage) {
-    // تجاهل المسار النسبي تماماً واستخدم الرابط المباشر
+    const baseUrl = "https://massahifalossol-nouari.github.io/MassahifAlossol/";
+    const fullPath = window.location.origin + '/' + pdfPath;
     const fileName = pdfPath.split('/').pop(); // qalun1.pdf
     const directUrl = `https://massahifalossol-nouari.github.io/MassahifAlossol/pdfs/${fileName}`;
-    const encodedPath = encodeURIComponent(directUrl);
+    const encodedPath = encodeURIComponent(fullPath);
     return `pdfjs/web/viewer.html?file=${encodedPath}#page=${realPage}`;
 }
 
 
-
-//function buildViewerUrl(pdfPath, realPage) {
-  //  const baseUrl = "https://massahifalossol-nouari.github.io/MassahifAlossol/";
-  //  const fullPath = window.location.origin + '/' + pdfPath;
-  //  const encodedPath = encodeURIComponent(fullPath);
-  //  return `pdfjs/web/viewer.html?file=${encodedPath}#page=${realPage}`;
-//}
 
 function savePage(page) { localStorage.setItem(PAGE_STORAGE, page); }
 function getSavedPage() {
@@ -941,6 +935,7 @@ setTimeout(function() {
         console.log("❌ الزر غير موجود");
     }
 }, 1000);
+
 // ============================================
 // نظام التخزين المؤقت للصفحات (Page Caching)
 // ============================================
