@@ -7,9 +7,9 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dis
 // 2. قائمة المصاحف
 // ============================================================
 const mushafs = [
-    { name: "1️⃣  قالون بالقصر والإسكان",    id: "q1", path: "pdfs/qalun1.pdf", startPage: 2 },
-    { name: "1️⃣ قالون بالقصر والصلة",      id: "q2", path: "pdfs/qalun2.pdf", startPage: 2 },
-    { name: "1️⃣ قالون بالتوسط والإسكان",   id: "q3", path: "pdfs/qalun3.pdf", startPage: 2 },
+    { name: "1️⃣قالون بالقصر والإسكان",    id: "q1", path: "pdfs/qalun1.pdf", startPage: 2 },
+    { name: "1️⃣قالون بالقصر والصلة",      id: "q2", path: "pdfs/qalun2.pdf", startPage: 2 },
+    { name: "1️⃣قالون بالتوسط والإسكان",   id: "q3", path: "pdfs/qalun3.pdf", startPage: 2 },
     { name: "1️⃣ قالون بالتوسط والصلة",     id: "q4", path: "pdfs/qalun4.pdf", startPage: 2 },
     { name: "1️⃣ ورش بقصر البدل مع الفتح",     id: "q5", path: "pdfs/warch1.pdf", startPage: 2 },
     { name: "1️⃣ ورش بتوسط البدل مع التقليل",     id: "q6", path: "pdfs/warch2.pdf", startPage: 2 },
