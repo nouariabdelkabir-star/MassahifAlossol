@@ -941,3 +941,95 @@ setTimeout(function() {
         console.log("❌ الزر غير موجود");
     }
 }, 1000);
+// ============================================
+// نظام التخزين المؤقت للصفحات (Page Caching)
+// ============================================
+
+// كائن لتخزين الصفحات التي تم تحميلها
+const pageCache = {};
+
+// دالة لحفظ الصفحة في الذاكرة المؤقتة
+function cachePage(pageNum, content) {
+    pageCache[pageNum] = content;
+    console.log(`💾 تم حفظ الصفحة ${pageNum} في الذاكرة المؤقتة`);
+}
+
+// دالة لاسترجاع الصفحة من الذاكرة المؤقتة
+function getCachedPage(pageNum) {
+    return pageCache[pageNum];
+}
+
+// دالة للتحقق إذا كانت الصفحة مخزنة
+function isPageCached(pageNum) {
+    return pageCache[pageNum] !== undefined;
+}
+
+// تعديل دالة goToPage لإضافة التخزين المؤقت
+const originalGoToPageCache = goToPage;
+goToPage = async function(pageNum) {
+    if (pageNum < 1) pageNum = 1;
+    if (pageNum > 640) pageNum = 640;
+    
+    // التحقق إذا كانت الصفحة مخزنة مسبقاً
+    if (isPageCached(pageNum)) {
+        console.log(`📄 الصفحة ${pageNum} موجودة في الذاكرة المؤقتة - عرض سريع`);
+        // عرض المحتوى المخزن
+        const cachedContent = getCachedPage(pageNum);
+        if (cachedContent) {
+            const container = document.getElementById('viewer-container');
+            container.innerHTML = cachedContent;
+            mainIframe = container.querySelector('iframe');
+            return;
+        }
+    }
+    
+    // إذا لم تكن مخزنة، قم بتحميلها كالمعتاد
+    originalGoToPageCache(pageNum);
+    
+    // بعد التحميل، قم بحفظها في الذاكرة المؤقتة
+    setTimeout(() => {
+        const container = document.getElementById('viewer-container');
+        const currentContent = container.innerHTML;
+        if (currentContent && !isPageCached(pageNum)) {
+            cachePage(pageNum, currentContent);
+        }
+    }, 1000);
+};
+
+// تخزين الصفحات المجاورة أيضاً لتسريع التنقل
+function cacheNearbyPages(currentPage) {
+    const pagesToCache = [currentPage - 2, currentPage - 1, currentPage + 1, currentPage + 2];
+    pagesToCache.forEach(page => {
+        if (page >= 1 && page <= 640 && !isPageCached(page)) {
+            // تحميل الصفحات المجاورة في الخلفية
+            setTimeout(() => {
+                if (!isPageCached(page)) {
+                    console.log(`🔄 تحميل الصفحة ${page} مسبقاً في الخلفية`);
+                    originalGoToPageCache(page);
+                    setTimeout(() => {
+                        const container = document.getElementById('viewer-container');
+                        const content = container.innerHTML;
+                        if (content && !isPageCached(page)) {
+                            cachePage(page, content);
+                        }
+                    }, 1500);
+                }
+            }, 500);
+        }
+    });
+}
+
+// تعديل دالة nextPage و prevPage للتخزين المسبق
+const originalNextPage = nextPage;
+nextPage = function() {
+    originalNextPage();
+    setTimeout(() => cacheNearbyPages(currentPage), 500);
+};
+
+const originalPrevPage = prevPage;
+prevPage = function() {
+    originalPrevPage();
+    setTimeout(() => cacheNearbyPages(currentPage), 500);
+};
+
+console.log("✅ نظام التخزين المؤقت للصفحات جاهز");
