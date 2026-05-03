@@ -656,3 +656,89 @@ iframe {
         padding: 4px 10px;
     }
 }
+/* ========================================
+   للهواتف: تحويل النصوص إلى رموز (أيقونات)
+   ======================================== */
+
+@media (max-width: 768px) {
+    /* إخفاء النص الأصلي للأزرار المحددة */
+    .ctrl-btn span.text,
+    .ctrl-btn .btn-text {
+        display: none;
+    }
+    
+    /* جعل الأزرار تحتوي على رموز فقط */
+    #prevBtn::before {
+        content: "◀";
+        font-size: 1rem;
+    }
+    #prevBtn {
+        font-size: 0;
+        padding: 8px 12px;
+    }
+    
+    #nextBtn::before {
+        content: "▶";
+        font-size: 1rem;
+    }
+    #nextBtn {
+        font-size: 0;
+        padding: 8px 12px;
+    }
+    
+    #openSurahBtn::before {
+        content: "📖";
+        font-size: 1rem;
+    }
+    #openSurahBtn {
+        font-size: 0;
+        padding: 8px 10px;
+    }
+    
+    #compareBtn::before {
+        content: "📊";
+        font-size: 1rem;
+    }
+    #compareBtn {
+        font-size: 0;
+        padding: 8px 10px;
+    }
+    
+    #audioBtn::before {
+        content: "🔊";
+        font-size: 1rem;
+    }
+    #audioBtn {
+        font-size: 0;
+        padding: 8px 10px;
+    }
+    
+    #zoomOutBtn::before {
+        content: "🔍-";
+        font-size: 0.9rem;
+    }
+    #zoomOutBtn {
+        font-size: 0;
+        padding: 8px 8px;
+    }
+    
+    #zoomInBtn::before {
+        content: "🔍+";
+        font-size: 0.9rem;
+    }
+    #zoomInBtn {
+        font-size: 0;
+        padding: 8px 8px;
+    }
+    
+    /* زر التبديل بين المصادر */
+    #toggleSourceBtn {
+        font-size: 0.7rem;
+        padding: 6px 8px;
+    }
+    #toggleSourceBtn::before {
+        content: "🌐";
+        font-size: 0.9rem;
+        margin-left: 3px;
+    }
+}
