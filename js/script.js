@@ -199,15 +199,28 @@ function getRealPage(displayPage, startPage) {
     return displayPage + (startPage || 3) - 1;
 }
 
+//*function buildViewerUrl(pdfPath, realPage) {
+   // const baseUrl = "https://massahifalossol-nouari.github.io/MassahifAlossol/";
+  //  const fullPath = window.location.origin + '/' + pdfPath;
+  //  const fileName = pdfPath.split('/').pop(); // qalun1.pdf
+  //  const directUrl = `https://massahifalossol-nouari.github.io/MassahifAlossol/pdfs/${fileName}`;
+ //   const encodedPath = encodeURIComponent(fullPath);
+ //   return `pdfjs/web/viewer.html?file=${encodedPath}#page=${realPage}`;
+//}
 function buildViewerUrl(pdfPath, realPage) {
-    const baseUrl = "https://massahifalossol-nouari.github.io/MassahifAlossol/";
-    const fullPath = window.location.origin + '/' + pdfPath;
-    const fileName = pdfPath.split('/').pop(); // qalun1.pdf
-    const directUrl = `https://massahifalossol-nouari.github.io/MassahifAlossol/pdfs/${fileName}`;
-    const encodedPath = encodeURIComponent(fullPath);
+    // 1. استخرج اسم ملف PDF من المسار القديم (مثل: "qalun1.pdf")
+    const fileName = pdfPath.split('/').pop();
+
+    // 2. قم ببناء المسار الصحيح والكامل لملف PDF على الخادم
+    //    لاحظ أنه تمت إضافة مجلد "MassahifAlossol/" بعد النطاق.
+    const correctPdfUrl = `https://massahifalossol-nouari.github.io/MassahifAlossol/pdfs/${fileName}`;
+
+    // 3. قم بترميز الرابط (URL Encoding) ليكون صالحاً للاستخدام
+    const encodedPath = encodeURIComponent(correctPdfUrl);
+
+    // 4. أعد بناء رابط عارض PDF.js مع الرابط المُصحّح
     return `pdfjs/web/viewer.html?file=${encodedPath}#page=${realPage}`;
 }
-
 
 
 function savePage(page) { localStorage.setItem(PAGE_STORAGE, page); }
