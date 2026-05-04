@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.16.105/build/pdf.min.js"></script>
     <link rel="preload" href="fonts/NouariAbdelkabir.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="مصاحف الأصول">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
 </head>
 <body>
 <button class="menu-toggle" id="menuToggle">☰</button>
@@ -316,6 +321,14 @@
     if (stopBtn) stopBtn.onclick = stopNafiAudio;
 </script>
 
+<script>
+  // تسجيل Service Worker
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/MassahifAlossol/sw.js')
+      .then(reg => console.log('✅ Service Worker مسجل', reg))
+      .catch(err => console.log('❌ خطأ:', err));
+  }
+</script>
 
 
 
