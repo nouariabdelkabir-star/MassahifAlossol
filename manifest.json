@@ -2,12 +2,12 @@
   "name": "مصاحف الأصول الملونة",
   "short_name": "مصاحف الأصول",
   "description": "القراءات العشر من طريقي الشاطبية والدرة",
-  "start_url": "/MassahifAlossol/",
+  "start_url": "https://massahifalossol-nouari.github.io/MassahifAlossol/",
   "display": "standalone",
-  "theme_color": "#1a1a2e",
-  "background_color": "#1a1a2e",
+  "theme_color": "#982b9e",
+  "background_color": "#3b3bd4",
   "orientation": "portrait",
-  "dir": "rtl",
+  "dir": "auto",
   "lang": "ar",
   "icons": [
     {
@@ -50,5 +50,19 @@
       "sizes": "512x512",
       "type": "image/png"
     }
+  ],
+  "id": "MassahifAlossol",
+  "display_override": [
+    "browser",
+    "fullscreen",
+    "minimal-ui",
+    "standalone",
+    "window-controls-overlay"
+  ],
+  "categories": [
+    "books",
+    "education",
+    "music",
+    "navigation"
   ]
 }
