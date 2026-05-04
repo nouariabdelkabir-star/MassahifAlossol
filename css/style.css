@@ -12,6 +12,29 @@ body {
     flex-direction: column;
     overflow: hidden;
 }
+/* ========================================
+   تعريف الخط NouariAbdelkabir
+   ======================================== */
+
+@font-face {
+    font-family: 'NouariAbdelkabir';
+    src: url('../fonts/NouariAbdelkabir.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* تطبيق الخط على جميع عناصر الصفحة */
+body, button, .mushaf-btn, .ctrl-btn, .page-label, .page-input,
+.surah-item, .compare-mushaf-item, .panel-header, .close-panel {
+    font-family: 'NouariAbdelkabir', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* تنسيقات خاصة للعناوين */
+h1, h2, h3, .sidebar-header h2, .panel-header h3 {
+    font-family: 'NouariAbdelkabir', 'Segoe UI', sans-serif;
+    font-weight: bold;
+}
 
 /* ========== الحاوية الرئيسية ========== */
 .app-wrapper {
@@ -690,3 +713,7 @@ iframe {
 .more-menu.hidden {
     display: none;
 }
+/* ========================================
+   تكبير الحجم بنسبة 20%
+   ======================================== */
+
