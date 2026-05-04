@@ -41,8 +41,10 @@
             <button class="ctrl-btn surah-btn" id="openSurahBtn">📖فهرس</button>
             <button class="ctrl-btn compare-btn" id="compareBtn">📊مقارنة</button>
             <button class="ctrl-btn" id="audioBtn">🔊استماع</button>
-            <button class="ctrl-btn more-btn" id="moreBtn">☰المزيد</button>
+            <button class="ctrl-btn nafi-audio-btn" id="nafiAudioBtn" style="background-color:#8e44ad;">🔊 نافع</button>
             
+            <button class="ctrl-btn more-btn" id="moreBtn">☰المزيد</button>
+                        
             <div id="miniPlayer" class="mini-player hidden">
                 <button id="miniPlayPause" class="mini-btn">⏸</button>
                 <button id="miniStop" class="mini-btn">⏹</button>
@@ -212,6 +214,108 @@
         };
     })();
 </script>
+
+<script>
+    let nafiAudio = null;
+    let isNafiPlaying = false;
+    let nafiCurrentPage = 1;
+    
+    // تحديث واجهة زر نافع
+    function updateNafiUI(isPlaying, pageNum) {
+        const btn = document.getElementById('nafiAudioBtn');
+        if (btn) {
+            if (isPlaying) {
+                btn.textContent = `⏸ نافع ${pageNum}`;
+                btn.style.backgroundColor = '#e74c3c';
+            } else {
+                btn.textContent = '🔊 نافع';
+                btn.style.backgroundColor = '#8e44ad';
+            }
+        }
+    }
+    
+    // تشغيل صوت نافع
+    function playNafiAudio(pageNum) {
+        if (nafiAudio) {
+            nafiAudio.pause();
+            nafiAudio = null;
+        }
+        
+        const pageStr = String(pageNum).padStart(3, '0');
+        const audioUrl = `audio/nafi/${pageStr}.mp3`;
+        
+        nafiAudio = new Audio(audioUrl);
+        nafiAudio.volume = 0.7;
+        
+        nafiAudio.addEventListener('timeupdate', function() {
+            if (nafiAudio && nafiAudio.duration) {
+                const percent = (nafiAudio.currentTime / nafiAudio.duration) * 100;
+                // يمكن إضافة شريط تقدم هنا
+            }
+        });
+        
+        nafiAudio.addEventListener('ended', () => {
+            isNafiPlaying = false;
+            updateNafiUI(false, pageNum);
+            if (pageNum < 604) {
+                // الانتقال للصفحة التالية تلقائياً
+                document.getElementById('pageInput').value = pageNum + 1;
+                if (typeof goToPage === 'function') {
+                    goToPage(pageNum + 1);
+                }
+                setTimeout(() => playNafiAudio(pageNum + 1), 500);
+            }
+        });
+        
+        nafiAudio.addEventListener('error', () => {
+            alert(`⚠️ لا توجد تلاوة للصفحة ${pageNum} في مصحف نافع`);
+            isNafiPlaying = false;
+            updateNafiUI(false, pageNum);
+        });
+        
+        nafiAudio.play();
+        isNafiPlaying = true;
+        updateNafiUI(true, pageNum);
+    }
+    
+    // إيقاف صوت نافع
+    function stopNafiAudio() {
+        if (nafiAudio) {
+            nafiAudio.pause();
+            nafiAudio = null;
+        }
+        isNafiPlaying = false;
+        updateNafiUI(false, nafiCurrentPage);
+    }
+    
+    // تشغيل/إيقاف
+    function toggleNafiAudio() {
+        if (isNafiPlaying) {
+            stopNafiAudio();
+        } else {
+            const currentPage = document.getElementById('pageInput').value;
+            playNafiAudio(parseInt(currentPage));
+        }
+    }
+    
+    // الربط مع التغيير اليدوي للصفحة
+    const originalPageInput = document.getElementById('pageInput');
+    if (originalPageInput) {
+        originalPageInput.addEventListener('change', function() {
+            if (isNafiPlaying) {
+                playNafiAudio(parseInt(this.value));
+            }
+        });
+    }
+    
+    // ربط الأزرار
+    document.getElementById('nafiAudioBtn').onclick = toggleNafiAudio;
+    
+    // زر إيقاف إضافي
+    const stopBtn = document.getElementById('nafiStopBtn');
+    if (stopBtn) stopBtn.onclick = stopNafiAudio;
+</script>
+
 
 
 
