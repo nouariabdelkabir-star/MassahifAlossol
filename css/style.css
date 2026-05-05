@@ -12,10 +12,10 @@ body {
     flex-direction: column;
     overflow: hidden;
 }
+
 /* ========================================
    تعريف الخط NouariAbdelkabir
    ======================================== */
-
 @font-face {
     font-family: 'NouariAbdelkabir';
     src: url('../fonts/NouariAbdelkabir.ttf') format('truetype');
@@ -24,19 +24,17 @@ body {
     font-display: swap;
 }
 
-/* تطبيق الخط على جميع عناصر الصفحة */
 body, button, .mushaf-btn, .ctrl-btn, .page-label, .page-input,
 .surah-item, .compare-mushaf-item, .panel-header, .close-panel {
     font-family: 'NouariAbdelkabir', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* تنسيقات خاصة للعناوين */
 h1, h2, h3, .sidebar-header h2, .panel-header h3 {
     font-family: 'NouariAbdelkabir', 'Segoe UI', sans-serif;
     font-weight: bold;
 }
 
-/* ========== الحاوية الرئيسية ========== */
+/* ========== الحاويات الرئيسية ========== */
 .app-wrapper {
     display: flex;
     flex: 1;
@@ -44,7 +42,6 @@ h1, h2, h3, .sidebar-header h2, .panel-header h3 {
     overflow: hidden;
 }
 
-/* ========== حاوية العرض والشريط ========== */
 .viewer-section {
     flex: 1;
     display: flex;
@@ -185,7 +182,7 @@ iframe {
     flex: 1;
 }
 
-/* ========== الشريط السفلي ========== */
+/* ========== الشريط السفلي (تصميم عام) ========== */
 .bottom-bar {
     background-color: #16213e;
     padding: 8px 16px;
@@ -325,13 +322,12 @@ iframe {
     text-align: center;
 }
 
-/* زر الصوت الرئيسي */
 #audioBtn {
     transition: all 0.3s ease;
     background-color: #1abc9c;
 }
 
-/* أزرار التكبير والتصغير */
+/* ========== أزرار التكبير والتصغير ========== */
 .zoom-btn {
     background-color: #3498db;
 }
@@ -465,31 +461,29 @@ iframe {
     transform: scale(1.05);
 }
 
-/* ========== شريط التمرير ========== */
 ::-webkit-scrollbar {
     width: 5px;
 }
+
 ::-webkit-scrollbar-track {
     background: #16213e;
 }
+
 ::-webkit-scrollbar-thumb {
     background: #e94560;
     border-radius: 5px;
 }
 
 /* ========================================
-   تحسينات الهواتف (أزرار صغيرة + إخفاء مشغل الصوت)
+   قواعد الهواتف الموحدة (بدون تكرار)
    ======================================== */
-
 @media (max-width: 768px) {
-    /* زر القائمة */
     .menu-toggle {
         display: flex;
         align-items: center;
         justify-content: center;
     }
-    
-    /* القائمة الجانبية */
+
     .sidebar {
         position: fixed;
         top: 0;
@@ -500,11 +494,11 @@ iframe {
         transition: right 0.3s ease;
         box-shadow: 2px 0 15px rgba(0,0,0,0.3);
     }
-    
+
     .sidebar.open {
         right: 0;
     }
-    
+
     .sidebar-overlay {
         position: fixed;
         top: 0;
@@ -515,80 +509,96 @@ iframe {
         z-index: 1000;
         display: none;
     }
-    
+
     .sidebar-overlay.active {
         display: block;
     }
-    
+
     .viewer-area {
         margin-right: 0;
         width: 100%;
     }
-    
+
     .float-panel {
         width: 85%;
         right: -85%;
     }
-    
+
     .compare-split {
         flex-direction: row;
         gap: 5px;
     }
-    
+
     .compare-label {
         font-size: 0.6rem;
         padding: 4px;
     }
-    
-    /* ===== الشريط السفلي - أزرار صغيرة جداً ===== */
+
+    /* الشريط السفلي ثابت في الأسفل */
     .bottom-bar {
-        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background-color: #16213e;
+        border-radius: 12px 12px 0 0;
+        margin: 0;
+        padding: 8px 12px;
+        z-index: 1000;
+        display: flex !important;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 6px;
-        padding: 8px 10px;
-        margin: 0 8px 12px 8px;
+        gap: 8px;
+        border-top: 1px solid #e94560;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
     }
-    
+
+    .viewer-section {
+        margin-bottom: 80px;
+    }
+
     /* تصغير الأزرار */
     .ctrl-btn {
         padding: 5px 10px;
-        border-radius: 8px;
-        font-size: 0.65rem;
+        font-size: 0.7rem;
         min-width: 50px;
+        display: inline-flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
-    
-    /* تصغير صفحة التحكم */
+
     .page-box {
         padding: 3px 8px;
         border-radius: 8px;
     }
-    
+
     .page-input {
         width: 45px;
         padding: 3px;
         font-size: 0.7rem;
     }
-    
+
     .page-label {
         font-size: 0.6rem;
     }
-    
-    /* ===== إخفاء مشغل الصوت على الهواتف إلا عند التشغيل ===== */
+
+    /* إخفاء أزرار إضافية */
+    #zoomOutBtn, #zoomInBtn, #openSurahBtn, #compareBtn, #toggleSourceBtn {
+        display: none !important;
+    }
+
+    /* إظهار زر المزيد */
+    .more-btn {
+        display: inline-flex !important;
+        background-color: #555;
+    }
+
+    /* إخفاء مشغل الصوت تمامًا */
     .mini-player {
         display: none !important;
     }
-    
-    /* إظهاره فقط عند التشغيل (عند إزالة كلاس hidden) */
-    .mini-player:not(.hidden) {
-        display: flex !important;
-        width: 100%;
-        justify-content: center;
-        margin-top: 6px;
-        order: 10;
-    }
-    
-    /* زر الصوت يبقى ظاهراً */
+
     #audioBtn {
         display: inline-flex !important;
     }
@@ -597,89 +607,53 @@ iframe {
 /* ========================================
    شاشات صغيرة جداً
    ======================================== */
-
 @media (max-width: 480px) {
     .ctrl-btn {
         padding: 4px 7px;
         font-size: 0.6rem;
         min-width: 42px;
     }
-    
+
     .page-input {
         width: 38px;
         font-size: 0.65rem;
     }
-    
+
     .page-label {
         font-size: 0.55rem;
     }
-    
+
     .float-panel {
         width: 92%;
         right: -92%;
     }
-    
-    .mini-progress {
-        width: 50px;
-    }
 }
 
 /* ========================================
-   حل خاص لهواتف ريالمي
+   حل خاص لهواتف ريالمي والأندرويد القديم
    ======================================== */
-
 @media (max-width: 768px) and (-webkit-min-device-pixel-ratio: 0) {
     .bottom-bar {
         display: block !important;
         text-align: center !important;
     }
-    
+
     .bottom-bar .ctrl-btn,
     .bottom-bar .page-box {
         display: inline-block !important;
         margin: 3px !important;
         vertical-align: middle !important;
     }
-    
+
     .ctrl-btn {
         display: inline-block !important;
         width: auto !important;
     }
-    
-    .mini-player:not(.hidden) {
-        display: inline-flex !important;
-        width: auto !important;
-    }
 }
+
 /* ========================================
-   زر المزيد للهواتف (يظهر فقط على الشاشات الصغيرة)
+   القائمة المنبثقة (المزيد)
    ======================================== */
-
-/* إخفاء زر المزيد على الكمبيوتر */
-@media (min-width: 769px) {
-    .more-btn {
-        display: none !important;
-    }
-}
-
-/* على الهواتف: إظهار زر المزيد وإخفاء الأزرار الزائدة */
-@media (max-width: 768px) {
-    .more-btn {
-        display: inline-flex !important;
-        background-color: #555;
-    }
-    
-    .more-btn:hover {
-        background-color: #777;
-    }
-    
-    /* إخفاء الأزرار الزائدة على الهاتف */
-    #zoomOutBtn, #zoomInBtn, #openSurahBtn, #compareBtn, #toggleSourceBtn {
-        display: none !important;
-    }
-}
-
-/* القائمة المنبثقة */
 .more-menu {
     position: fixed;
     bottom: 70px;
@@ -713,58 +687,3 @@ iframe {
 .more-menu.hidden {
     display: none;
 }
-
-
-/* ========================================
-   حل ثابت لظهور الشريط السفلي في جميع الهواتف
-   ======================================== */
-
-/* جعل الشريط السفلي ثابتاً في الأسفل */
-@media (max-width: 768px) {
-    .bottom-bar {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        background-color: #16213e;
-        border-radius: 12px 12px 0 0;
-        margin: 0;
-        padding: 8px 12px;
-        z-index: 1000;
-        display: flex !important;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 8px;
-        border-top: 1px solid #e94560;
-        box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
-    }
-    
-    /* تعويض المساحة للشريط الثابت */
-    .viewer-section {
-        margin-bottom: 80px;
-    }
-    
-    /* تصغير الأزرار قليلاً */
-    .ctrl-btn {
-        padding: 6px 12px;
-        font-size: 0.7rem;
-    }
-}
-
-/* حل خاص لمتصفحات الأندرويد القديمة */
-@media (max-width: 768px) and (-webkit-min-device-pixel-ratio: 0) {
-    .bottom-bar {
-        display: block !important;
-        text-align: center !important;
-    }
-    
-    .bottom-bar .ctrl-btn,
-    .bottom-bar .page-box,
-    .bottom-bar .mini-player {
-        display: inline-block !important;
-        margin: 4px !important;
-        vertical-align: middle !important;
-    }
-}
-
